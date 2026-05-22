@@ -27,7 +27,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/klacol/home-assistant-remeha-modbus"
+Homepage = "https://github.com/klacol/remeha-modbus"
 
 [tool.setuptools.packages.find]
 include = ["remeha_modbus*"]
