@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "remeha_modbus"
+version = "0.1.0"
+description = "A Python library for accessing Remeha heating systems via Modbus TCP (GTW-08 gateway)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Klaus Aengenvoort" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pymodbus>=3.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.urls]
+Homepage = "https://github.com/klacol/home-assistant-remeha-modbus"
+
+[tool.setuptools.packages.find]
+include = ["remeha_modbus*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
