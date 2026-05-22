@@ -32,8 +32,8 @@ pip install remeha_modbus
 Or for development:
 
 ```bash
-git clone https://github.com/klacol/home-assistant-remeha-modbus.git
-cd home-assistant-remeha-modbus
+git clone https://github.com/klacol/remeha-modbus.git
+cd remeha-modbus
 pip install -e ".[dev]"
 ```
 
@@ -82,4 +82,5 @@ The gateway provides Modbus TCP access over Ethernet.
 
 - [Modbus Parameter Documentation (Markdown)](docs/Modbus%20GTW-08%20-%20Liste%20der%20Parameter%207740782-01%2026072019.md)
 - [Original PDF](docs/Modbus%20GTW-08%20-%20Liste%20der%20Parameter%207740782-01%2026072019.pdf)
+- [GTW-08 Installation Guide (Home Assistant Community)](https://community.home-assistant.io/t/configuring-modbus-integration-for-remeha-qinta-ace-gas-heating-device/336268)
 
