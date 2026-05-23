@@ -22,6 +22,7 @@ from remeha_modbus.registers import (
     MAIN_CONTROLLER_REGISTERS,
     SYSTEM_DISCOVERY_REGISTERS,
     RegisterDefinition,
+    decode_bitfield,
 )
 
 # Build lookup: register name -> RegisterDefinition
@@ -39,6 +40,12 @@ def _format_value(name: str, value) -> str:
     reg = _REG_LOOKUP.get(name)
     if reg is None:
         return f"  {name}: {value}"
+    # Bitfield decoding
+    if reg.bit_definitions and isinstance(value, int):
+        decoded = decode_bitfield(reg, value)
+        if decoded:
+            return f"  {name}: {value} ({decoded})"
+        return f"  {name}: {value} (keine Flags aktiv)"
     unit = f" {reg.unit}" if reg.unit else ""
     gain_info = f"  (gain={reg.gain})" if reg.gain != 1.0 else ""
     return f"  {name}: {value}{unit}{gain_info}"

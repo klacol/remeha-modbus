@@ -44,6 +44,19 @@ class RegisterDefinition:
     unit: str = ""
     register_count: int = 1  # Number of 16-bit registers this value spans
     enum_values: dict | None = None  # For ENUM8 types
+    bit_definitions: dict[int, str] | None = None  # For bitfield types
+
+
+def decode_bitfield(register: RegisterDefinition, value: int) -> str:
+    """Decode a bitfield value to a comma-separated string of active flag labels."""
+    if register.bit_definitions is None:
+        return ""
+    active = []
+    for bit in range(16):
+        if value & (1 << bit):
+            label = register.bit_definitions.get(bit, f"Bit{bit}")
+            active.append(label)
+    return ", ".join(active)
 
 
 # =============================================================================
@@ -98,11 +111,27 @@ MAIN_CONTROLLER_REGISTERS = [
         address=275, name="producer_status",
         description="Erzeuger-Statusbitfeld",
         data_type=DataType.UINT8, access=AccessMode.READ,
+        bit_definitions={
+            0: "pump_active",
+            1: "power_engine_active",
+            2: "dhw_generating",
+            3: "ch_possible",
+            4: "dhw_possible",
+            5: "cooling_possible",
+            6: "electric_possible",
+            7: "lockout_present",
+        },
     ),
     RegisterDefinition(
         address=276, name="producer_request",
-        description="Erzeuger-Anforderung (Bit0=Frostschutz, Bit1=Frostschutz nur Pumpe, Bit2=Schornsteinfeger, Bit3=Wartungsanforderung)",
+        description="Erzeuger-Anforderung",
         data_type=DataType.UINT8, access=AccessMode.READ,
+        bit_definitions={
+            0: "frost_protection",
+            1: "frost_protection_pump_only",
+            2: "chimney_sweep",
+            3: "maintenance_request",
+        },
     ),
     RegisterDefinition(
         address=277, name="appliance_error",
@@ -117,13 +146,32 @@ MAIN_CONTROLLER_REGISTERS = [
     ),
     RegisterDefinition(
         address=279, name="appliance_status_1",
-        description="Gerätestatus 1 (Bit0=Flamme, Bit1=WP, Bit2=ElektrZusatzerz, Bit5=WartungErforderlich, Bit6=ResetErforderlich, Bit7=WasserdruckGering)",
+        description="Gerätestatus 1",
         data_type=DataType.UINT16, access=AccessMode.READ,
+        bit_definitions={
+            0: "flame",
+            1: "heat_pump",
+            2: "electric_backup",
+            3: "electric_backup_2",
+            4: "dhw_electric_backup",
+            5: "maintenance_required",
+            6: "reset_required",
+            7: "water_pressure_low",
+        },
     ),
     RegisterDefinition(
         address=280, name="appliance_status_2",
-        description="Gerätestatus 2 (Bit0=Pumpe, Bit1=3WegeVentilOffen, Bit4=TWWAktiv, Bit5=HzgAktiv, Bit6=KühlenAktiv)",
+        description="Gerätestatus 2",
         data_type=DataType.UINT16, access=AccessMode.READ,
+        bit_definitions={
+            0: "pump",
+            1: "three_way_valve_open",
+            2: "three_way_valve",
+            3: "three_way_valve_closed",
+            4: "dhw_active",
+            5: "ch_active",
+            6: "cooling_active",
+        },
     ),
     RegisterDefinition(
         address=288, name="burner_starts",

@@ -273,3 +273,53 @@ class TestClientWriteRegister:
         client._client.write_register.assert_called_once_with(
             address=500, value=1, device_id=1,
         )
+
+
+class TestDecodeBitfield:
+    """Test bitfield decoding."""
+
+    def test_single_bit_set(self):
+        from remeha_modbus.registers import decode_bitfield
+        reg = RegisterDefinition(
+            address=279, name="appliance_status_1", description="Gerätestatus 1",
+            data_type=DataType.UINT16, access=AccessMode.READ,
+            bit_definitions={0: "flame", 1: "heat_pump", 5: "maintenance_required"},
+        )
+        assert decode_bitfield(reg, 1) == "flame"
+
+    def test_multiple_bits_set(self):
+        from remeha_modbus.registers import decode_bitfield
+        reg = RegisterDefinition(
+            address=279, name="appliance_status_1", description="Gerätestatus 1",
+            data_type=DataType.UINT16, access=AccessMode.READ,
+            bit_definitions={0: "flame", 5: "maintenance_required"},
+        )
+        # 33 = 0b00100001 => Bit0 + Bit5
+        assert decode_bitfield(reg, 33) == "flame, maintenance_required"
+
+    def test_no_bits_set(self):
+        from remeha_modbus.registers import decode_bitfield
+        reg = RegisterDefinition(
+            address=276, name="producer_request", description="Erzeuger-Anforderung",
+            data_type=DataType.UINT8, access=AccessMode.READ,
+            bit_definitions={0: "frost_protection", 1: "frost_protection_pump_only"},
+        )
+        assert decode_bitfield(reg, 0) == ""
+
+    def test_undefined_bit_shows_bit_number(self):
+        from remeha_modbus.registers import decode_bitfield
+        reg = RegisterDefinition(
+            address=279, name="appliance_status_1", description="Gerätestatus 1",
+            data_type=DataType.UINT16, access=AccessMode.READ,
+            bit_definitions={0: "flame"},
+        )
+        # 3 = 0b11 => Bit0 defined, Bit1 undefined
+        assert decode_bitfield(reg, 3) == "flame, Bit1"
+
+    def test_no_bit_definitions_returns_empty(self):
+        from remeha_modbus.registers import decode_bitfield
+        reg = RegisterDefinition(
+            address=272, name="power_actual", description="Ist-Leistung",
+            data_type=DataType.UINT8, access=AccessMode.READ,
+        )
+        assert decode_bitfield(reg, 42) == ""
