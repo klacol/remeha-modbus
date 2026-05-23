@@ -3,6 +3,6 @@
 """Python library for accessing Remeha heating systems via Modbus TCP (GTW-08 gateway)."""
 
 from .registers import RegisterDefinition, DataType
-from .client import RemehaModbusClient
+from .client import NOT_SUPPORTED, RemehaModbusClient
 
-__all__ = ["RemehaModbusClient", "RegisterDefinition", "DataType"]
+__all__ = ["NOT_SUPPORTED", "RemehaModbusClient", "RegisterDefinition", "DataType"]

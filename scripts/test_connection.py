@@ -15,7 +15,45 @@ import sys
 
 sys.path.insert(0, ".")
 
-from remeha_modbus.client import RemehaModbusClient
+from remeha_modbus.client import NOT_SUPPORTED, RemehaModbusClient
+from remeha_modbus.device_map import identify_device
+from remeha_modbus.registers import (
+    APPLIANCE_REGISTERS,
+    MAIN_CONTROLLER_REGISTERS,
+    SYSTEM_DISCOVERY_REGISTERS,
+    RegisterDefinition,
+)
+
+# Build lookup: register name -> RegisterDefinition
+_REG_LOOKUP: dict[str, RegisterDefinition] = {}
+for _reg in SYSTEM_DISCOVERY_REGISTERS + MAIN_CONTROLLER_REGISTERS + APPLIANCE_REGISTERS:
+    _REG_LOOKUP[_reg.name] = _reg
+
+
+def _format_value(name: str, value) -> str:
+    """Format a register value with unit and gain info for display."""
+    if value is NOT_SUPPORTED:
+        return f"  {name}: [read error]"
+    if value is None:
+        return f"  {name}: [not supported]"
+    reg = _REG_LOOKUP.get(name)
+    if reg is None:
+        return f"  {name}: {value}"
+    unit = f" {reg.unit}" if reg.unit else ""
+    gain_info = f"  (gain={reg.gain})" if reg.gain != 1.0 else ""
+    return f"  {name}: {value}{unit}{gain_info}"
+
+
+_legend_printed = False
+
+
+def _print_legend():
+    global _legend_printed
+    if not _legend_printed:
+        print()
+        print("  Legend: [not supported] = device returned 0xFF/0xFFFF (feature not available)")
+        print("          [read error]    = device returned Modbus error (register unknown)")
+        _legend_printed = True
 
 # Waveshare RS232/485 ETH Modbus Gateway
 GATEWAY_HOST = "192.168.1.224"
@@ -85,14 +123,51 @@ async def test_modbus(host: str, port: int, device_id: int) -> bool:
 
         print("      OK - Verbunden\n")
 
+        # Geräteinformation (Stammdaten)
+        print("=== Geräteinformation (Device Info) ===")
+        try:
+            device_info = await client.read_device_info()
+            # Collect article numbers for device identification
+            article_numbers = []
+            for name, value in device_info.items():
+                if isinstance(value, dict):
+                    # Board sub-dict: strip boardN_ prefix from keys
+                    prefix = name.replace("_", "") + "_"  # "board_1" -> "board1_"
+                    board_values = []
+                    for k, v in value.items():
+                        if v is None or v is NOT_SUPPORTED:
+                            continue
+                        short_key = k.replace(prefix, "", 1)
+                        board_values.append(f"{short_key}={v}")
+                        if short_key == "article_number":
+                            article_numbers.append(int(v))
+                    if board_values:
+                        print(f"  {name}: {', '.join(board_values)}")
+                else:
+                    print(_format_value(name, value))
+            # Try to identify the boiler model
+            device_type = device_info.get("device_type_gtw08")
+            model = identify_device(article_numbers, device_type)
+            if model:
+                print(f"\n  >>> Gerät erkannt: {model}")
+            else:
+                print(f"\n  >>> Gerät unbekannt. Bitte melden unter:")
+                print(f"      https://github.com/klacol/remeha-modbus/issues")
+                print(f"      (Modellname vom Typenschild + obige Werte angeben)")
+        except Exception as e:
+            print(f"  Fehler: {e}")
+
+        print()
+
         # System Discovery lesen
         print("=== System Discovery ===")
         try:
             discovery = await client.read_system_discovery()
             for name, value in discovery.items():
-                print(f"  {name}: {value}")
+                print(_format_value(name, value))
         except Exception as e:
             print(f"  Fehler: {e}")
+        _print_legend()
 
         print()
 
@@ -101,8 +176,7 @@ async def test_modbus(host: str, port: int, device_id: int) -> bool:
         try:
             main_ctrl = await client.read_main_controller()
             for name, value in main_ctrl.items():
-                if value is not None:
-                    print(f"  {name}: {value}")
+                print(_format_value(name, value))
         except Exception as e:
             print(f"  Fehler: {e}")
 
@@ -113,8 +187,7 @@ async def test_modbus(host: str, port: int, device_id: int) -> bool:
         try:
             appliance = await client.read_appliance()
             for name, value in appliance.items():
-                if value is not None:
-                    print(f"  {name}: {value}")
+                print(_format_value(name, value))
         except Exception as e:
             print(f"  Fehler: {e}")
 

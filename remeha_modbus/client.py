@@ -7,6 +7,7 @@ from pymodbus.exceptions import ModbusException
 from .registers import (
     ALL_REGISTERS,
     APPLIANCE_REGISTERS,
+    DEVICE_INFO_REGISTERS,
     INVALID_VALUES,
     MAIN_CONTROLLER_REGISTERS,
     MAINTENANCE_REGISTERS,
@@ -14,11 +15,21 @@ from .registers import (
     AccessMode,
     DataType,
     RegisterDefinition,
+    get_board_registers,
     get_zone_registers,
 )
 
 DEFAULT_PORT = 502
 DEFAULT_DEVICE_ID = 100  # GTW-08 default rotary switch position
+
+
+class _NotSupported:
+    """Sentinel indicating a register is not supported by the device."""
+    def __repr__(self):
+        return "NOT_SUPPORTED"
+
+
+NOT_SUPPORTED = _NotSupported()
 
 
 class RemehaModbusClient:
@@ -134,6 +145,20 @@ class RemehaModbusClient:
         """Read appliance (Gerät) registers."""
         return await self._read_register_group(APPLIANCE_REGISTERS)
 
+    async def read_device_info(self) -> dict[str, int | float | str | None]:
+        """Read GTW-08 device info and board details."""
+        data = await self._read_register_group(DEVICE_INFO_REGISTERS)
+        # Read board info for each detected board
+        num_devices = data.get("number_of_devices_from_discovery")
+        # Read board 1 always, then up to number_of_devices
+        discovery = await self._read_register_group(SYSTEM_DISCOVERY_REGISTERS)
+        num_boards = discovery.get("number_of_devices") or 1
+        for i in range(1, min(int(num_boards), 10) + 1):
+            board_regs = get_board_registers(i)
+            board_data = await self._read_register_group(board_regs)
+            data[f"board_{i}"] = board_data
+        return data
+
     async def read_main_controller(self) -> dict[str, int | float | str | None]:
         """Read main controller monitoring registers."""
         return await self._read_register_group(MAIN_CONTROLLER_REGISTERS)
@@ -152,25 +177,38 @@ class RemehaModbusClient:
         return await self._read_register_group(zone_regs)
 
     async def _read_register_group(self, registers: list[RegisterDefinition]) -> dict:
-        """Read a group of registers."""
+        """Read a group of registers.
+
+        Returns a dict with:
+        - decoded value for successful reads
+        - None for invalid/not-available sentinel values
+        - NOT_SUPPORTED for registers the device doesn't support
+        """
         data = {}
         for register in registers:
             try:
                 value = await self.read_register(register)
                 data[register.name] = value
             except ConnectionError:
-                data[register.name] = None
+                data[register.name] = NOT_SUPPORTED
         return data
 
-    def _decode_registers(self, registers: list[int], definition: RegisterDefinition) -> int:
+    def _decode_registers(self, registers: list[int], definition: RegisterDefinition) -> int | str:
         """Decode raw 16-bit register values to a single value based on data type."""
+        # VISIBLE_STRING: decode as ASCII from register bytes
+        if definition.data_type == DataType.VISIBLE_STRING:
+            raw_bytes = b""
+            for reg in registers:
+                raw_bytes += reg.to_bytes(2, byteorder="big")
+            return raw_bytes.decode("ascii", errors="replace").rstrip("\x00 ")
+
         if definition.register_count == 1:
             raw = registers[0]
         elif definition.register_count == 2:
             # 32-bit: first register is high word, second is low word
             raw = (registers[0] << 16) | registers[1]
         else:
-            # Multi-register string or large value
+            # Multi-register large value
             raw = 0
             for reg in registers:
                 raw = (raw << 16) | reg

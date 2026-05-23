@@ -345,6 +345,82 @@ MAINTENANCE_REGISTERS = [
 
 
 # =============================================================================
+# Chapter 4: Geräteinformation GTW-08 (Device Information)
+# Addresses 1 - 11
+# =============================================================================
+
+DEVICE_INFO_REGISTERS = [
+    RegisterDefinition(
+        address=1, name="manufacturer_code",
+        description="Herstellercode (USt-Code) des Gerätes",
+        data_type=DataType.VISIBLE_STRING, access=AccessMode.READ,
+        register_count=10,
+    ),
+    RegisterDefinition(
+        address=11, name="device_type_gtw08",
+        description="Gerätetyp GTW-08",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+]
+
+# Per-board info repeats every 6 registers starting at address 129
+# Board N: base = 129 + (N-1) * 6, fields: device_type, sw_version, config_version, hw_version, article_number(2)
+BOARD_INFO_REGISTERS_TEMPLATE = [
+    RegisterDefinition(
+        address=0, name="device_type",
+        description="Gerätetyp (CU-EHC, EEC, SCB, ...)",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
+        address=1, name="software_version",
+        description="Softwareversion",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
+        address=2, name="config_table_version",
+        description="Konfigurationstabelle Version",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
+        address=3, name="hardware_version",
+        description="Hardwareversion",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
+        address=4, name="article_number",
+        description="Artikelnummer",
+        data_type=DataType.UINT32, access=AccessMode.READ,
+        register_count=2,
+    ),
+]
+
+BOARD_INFO_BASE_ADDRESS = 129
+BOARD_INFO_SPAN = 6
+
+
+def get_board_registers(board_number: int) -> list[RegisterDefinition]:
+    """Get register definitions for a specific board instance (1-10)."""
+    if not 1 <= board_number <= 10:
+        raise ValueError(f"Board number must be 1-10, got {board_number}")
+    base = BOARD_INFO_BASE_ADDRESS + (board_number - 1) * BOARD_INFO_SPAN
+    registers = []
+    for template in BOARD_INFO_REGISTERS_TEMPLATE:
+        reg = RegisterDefinition(
+            address=base + template.address,
+            name=f"board{board_number}_{template.name}",
+            description=f"{template.description} (Instanz {board_number})",
+            data_type=template.data_type,
+            access=template.access,
+            gain=template.gain,
+            unit=template.unit,
+            register_count=template.register_count,
+            enum_values=template.enum_values,
+        )
+        registers.append(reg)
+    return registers
+
+
+# =============================================================================
 # Chapter 5: Systemermittlung (System Discovery)
 # Addresses 128 - 200
 # =============================================================================
@@ -458,6 +534,7 @@ INVALID_VALUES = {
     DataType.INT8: -128,
     DataType.INT16: -32768,
     DataType.INT32: -2147483648,
+    DataType.ENUM8: 0xFF,
 }
 
 
