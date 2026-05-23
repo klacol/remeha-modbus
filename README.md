@@ -1,5 +1,9 @@
 # remeha_modbus
 
+[![PyPI version](https://img.shields.io/pypi/v/remeha-modbus)](https://pypi.org/project/remeha-modbus/)
+[![Python](https://img.shields.io/pypi/pyversions/remeha-modbus)](https://pypi.org/project/remeha-modbus/)
+[![License: MIT](https://img.shields.io/pypi/l/remeha-modbus)](https://pypi.org/project/remeha-modbus/)
+
 Python library for accessing Remeha heating systems via Modbus TCP (GTW-08 gateway).
 
 Designed to be used standalone or as the backend for a Home Assistant custom integration.
@@ -26,7 +30,7 @@ Designed to be used standalone or as the backend for a Home Assistant custom int
 ## Installation
 
 ```bash
-pip install remeha_modbus
+pip install remeha-modbus
 ```
 
 Or for development:
