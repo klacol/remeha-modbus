@@ -20,7 +20,7 @@ from remeha_modbus.client import RemehaModbusClient
 # Waveshare RS232/485 ETH Modbus Gateway
 GATEWAY_HOST = "192.168.1.224"
 GATEWAY_PORT = 502
-SLAVE_ID = 1
+DEVICE_ID = 100  # GTW-08 Modbus-Adresse lt. Kodierrad-Einstellung
 
 
 def test_ping(host: str, count: int = 3, timeout: int = 5, label: str = "") -> bool:
@@ -71,11 +71,11 @@ def test_port(host: str, port: int, timeout: int = 5) -> bool:
         sock.close()
 
 
-async def test_modbus(host: str, port: int, slave_id: int) -> bool:
+async def test_modbus(host: str, port: int, device_id: int) -> bool:
     """Stage 3: Modbus register read test."""
-    print(f"[3/3] Modbus-Verbindung (Slave {slave_id}) ...")
+    print(f"[3/3] Modbus-Verbindung (Device {device_id}) ...")
 
-    client = RemehaModbusClient(host=host, port=port, slave_id=slave_id)
+    client = RemehaModbusClient(host=host, port=port, slave_id=device_id)
 
     try:
         connected = await client.connect()
@@ -162,7 +162,7 @@ async def main():
     print()
 
     # Stage 3: Modbus
-    success = await test_modbus(GATEWAY_HOST, GATEWAY_PORT, SLAVE_ID)
+    success = await test_modbus(GATEWAY_HOST, GATEWAY_PORT, DEVICE_ID)
 
     print()
     print("=" * 60)

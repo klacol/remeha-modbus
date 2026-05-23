@@ -7,7 +7,7 @@ Designed to be used standalone or as the backend for a Home Assistant custom int
 ## Features
 
 - Async Modbus TCP client based on `pymodbus`
-- Full register definitions from the [GTW-08 parameter list](docs/Modbus%20GTW-08%20-%20Liste%20der%20Parameter%207740782-01%2026072019.md)
+- Full register definitions from the [GTW-08 parameter list](docs/Modbus%20GTW-08%20-%20Liste%20der%20Parameter%207740782-01%2026072019.pdf)
 - Automatic value scaling (gain) and signed integer handling
 - Invalid value detection (returns `None` for disconnected sensors)
 - Support for all 12 heating zones

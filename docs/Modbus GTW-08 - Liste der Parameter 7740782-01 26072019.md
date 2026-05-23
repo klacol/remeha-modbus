@@ -1,5 +1,10 @@
 # Remeha GTW-08 Modbus Parameter
 
+> **Note:** This document is a Markdown conversion of the original PDF
+> *"Modbus GTW-08 – Liste der Parameter 7740782-01 26072019"*.
+> Only the German version of the PDF is available.
+> In case of discrepancies between this file and the PDF, the PDF takes precedence.
+
 ## Sehr geehrter Kunde, 
 
 Vielen Dank für den Kauf dieses Gerätes. 
@@ -8,49 +13,26 @@ Bitte lesen Sie dieses Handbuch vor der Verwendung des Produkts sorgfältig durc
 
 Wir hoffen, dass Sie viele Jahre Freude an dem Produkt haben. 
 
-## **INHALT** 
+## Inhalt
 
-|1|Vorwort|........................................................................................................................................... 5||
-|---|---|---|---|
-|2|Modbus-Protokoll ............................................................................................................................ 6|||
-||2.1<br>Einstellungen GTW-08 Modbus-Adresse||6|
-||2.2<br>Einstellungen GTW-08 Baudrate und Parität||6|
-||2.3<br>Unterstützte Funktionscodes||7|
-||2.4<br>Modbus-Ausnahmecodes||8|
-|3|Datenmodell .................................................................................................................................... 9|||
-||3.1<br>Unterstützte Datentypen||9|
-||3.1.1|Octet String ...................................................................................................................... 9||
-||3.1.2|UTF-8 in Octetstring ........................................................................................................ 9||
-||3.1.3|B8 ..................................................................................................................................... 9||
-||3.1.4|Int8 .................................................................................................................................. 9||
-||3.1.5|Int16 ................................................................................................................................ 9||
-||3.1.6|Int32 ................................................................................................................................ 9||
-||3.1.7|Uint8 ................................................................................................................................ 9||
-||3.1.8|Uint16 .............................................................................................................................. 9||
-||3.1.9|Uint32 ............................................................................................................................ 10||
-||3.1.10|Real32 ............................................................................................................................ 10||
-||3.1.11|Datum/Uhrzeit ............................................................................................................... 10||
-||3.2<br>Richtlinien für die Zuordnung von Datenobjekten und Einschränkungen||10|
-||3.2.1|Lufttemperaturen .......................................................................................................... 10||
-||3.2.2|Außentemperaturen ...................................................................................................... 10||
-||3.2.1|Wassertemperaturen .................................................................................................... 11||
-||3.2.2|Enumeratoren ............................................................................................................... 11||
-||3.2.3|Wasserdruck .................................................................................................................. 11||
-||3.2.4|Wasserflussmessungen ................................................................................................. 11||
-||3.2.5|Absolute Leistung .......................................................................................................... 11||
-
-
-||3.2.6<br>Relative Leistung ........................................................................................................... 11||
-|---|---|---|
-||3.3<br>Ungültige Werte|11|
-|4|Geräteinformation GTW-08 .......................................................................................................... 13||
-|5|Systemermittlung .......................................................................................................................... 14||
-|6|Überwachung der Hauptsteuerung ............................................................................................... 18||
-|7|Gerät .............................................................................................................................................. 21||
-|8|Wartung ......................................................................................................................................... 24||
-|9|Kreise (bis zu 12 Kreise) ................................................................................................................. 27||
-|10 Kaskade.......................................................................................................................................... 46|||
-|11 Pufferspeicher ............................................................................................................................... 54|||
+1. [Vorwort](#1-vorwort)
+2. [Modbus-Protokoll](#2-modbus-protokoll)
+   - 2.1 Einstellungen GTW-08 Modbus-Adresse
+   - 2.2 Einstellungen GTW-08 Baudrate und Parität
+   - 2.3 Unterstützte Funktionscodes
+   - 2.4 Modbus-Ausnahmecodes
+3. [Datenmodell](#3-datenmodell)
+   - 3.1 Unterstützte Datentypen (Octet String, UTF-8, B8, Int8, Int16, Int32, Uint8, Uint16, Uint32, Real32, Datum/Uhrzeit)
+   - 3.2 Richtlinien für die Zuordnung von Datenobjekten und Einschränkungen
+   - 3.3 Ungültige Werte
+4. [Geräteinformation GTW-08](#4-geräteinformation-gtw-08)
+5. [Systemermittlung](#5-systemermittlung)
+6. [Überwachung der Hauptsteuerung](#6-überwachung-der-hauptsteuerung)
+7. [Gerät](#7-gerät)
+8. [Wartung](#8-wartung)
+9. [Kreise (bis zu 12 Kreise)](#9-kreise-bis-zu-12-kreise)
+10. [Kaskade](#10-kaskade)
+11. [Pufferspeicher](#11-pufferspeicher)
 
 
 ## **1 Vorwort** 
@@ -227,9 +209,14 @@ Wenn der physikalische Fühler mit mehreren Signalen verbunden ist, geben die ni
 
 Für die folgenden Typen wird der Wert für ungültig verwendet: 
 
-Unsigned Integer8 = 255 (0xFF) UnSigned Integer16 = 65536 (0xFFFF) UnSigned Integer32 = 4294967296(0xFFFFFFFF) Signed Integer8 = -128 (0X80) 
-
-Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000) 
+| Datentyp | Ungültiger Wert | Hex |
+|---|---|---|
+| Unsigned Integer8 | 255 | 0xFF |
+| Unsigned Integer16 | 65535 | 0xFFFF |
+| Unsigned Integer32 | 4294967295 | 0xFFFFFFFF |
+| Signed Integer8 | -128 | 0x80 |
+| Signed Integer16 | -32768 | 0x8000 |
+| Signed Integer32 | -2147483648 | 0x80000000 |
 
 ## **4 Geräteinformation GTW-08** 
 
@@ -261,71 +248,54 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**132**|HardwareVersion1 16-9|HardwareVersion1 8-1|Hardwareversion des Geräts an Instanz 1(CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**133**|ArticleNumber1 32-25|ArticleNumber1 24-17|Artikelnummer des Geräts an Instanz 1(CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**134**|ArticleNumber1 16-9|ArticleNumber1 8-1|||||
-||||||||
 |**135**|DeviceTypeBoard2 16-9|DeviceTypeBoard2 8-1|Gerätetyp an Instanz 2 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**136**|SoftwareVersion2 16-9|SoftwareVersion2 8-1|Softwareversion des Geräts an Instanz 2 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**137**|DeviceConfigurationTabl<br>eVersion2 16-9|DeviceConfigurationTableV<br>ersion2 8-1|Konfigurationstabelle der Version des Geräts an Instanz 2 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**138**|HardwareVersion2 16-9|HardwareVersion2 8-1|Hardwareversion des Geräts an Instanz 2 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**139**|ArticleNumber2 32-25|ArticleNumber2 24-17|Artikelnummer des Geräts an Instanz 2 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**140**|ArticleNumber2 16-9|ArticleNumber2 8-1|||||
-||||||||
 |**141**|DeviceTypeBoard3 16-9|DeviceTypeBoard3 8-1|Gerätetyp an Instanz 3 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**142**|SoftwareVersion3 16-9|SoftwareVersion3 8-1|Softwareversion des Geräts an Instanz 3 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**143**|DeviceConfigurationTabl<br>eVersion3 16-9|DeviceConfigurationTableV<br>ersion3 8-1|Konfigurationstabelle der Version des Geräts an Instanz 3 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
-
-
 |**144**|HardwareVersion3 16-9|HardwareVersion3 8-1|Hardwareversion des Geräts an Instanz 3 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
-|---|---|---|---|---|---|---|
 |**145**|ArticleNumber3 32-25|ArticleNumber3 24-17|Artikelnummer des Geräts an Instanz 3 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**146**|ArticleNumber3 16-9|ArticleNumber3 8-1|||||
-||||||||
 |**147**|DeviceTypeBoard4 16-9|DeviceTypeBoard4 8-1|Gerätetyp an Instanz 4 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**148**|SoftwareVersion4 16-9|SoftwareVersion4 8-1|Softwareversion des Geräts an Instanz 4 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**149**|DeviceConfigurationTabl<br>eVersion4 16-9|DeviceConfigurationTableV<br>ersion4 8-1|Konfigurationstabelle der Version des Geräts an Instanz 4 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**150**|HardwareVersion4 16-9|HardwareVersion4 8-1|Hardwareversion des Geräts an Instanz 4 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**151**|ArticleNumber4 32-25|ArticleNumber4 24-17|Artikelnummer des Geräts an Instanz 4 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**152**|ArticleNumber4 16-9|ArticleNumber4 8-1|||||
-||||||||
 |**153**|DeviceTypeBoard5 16-9|DeviceTypeBoard5 8-1|Gerätetyp an Instanz 5 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**154**|SoftwareVersion5 16-9|SoftwareVersion5 8-1|Softwareversion des Geräts an Instanz 5 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**155**|DeviceConfigurationTabl<br>eVersion5 16-9|DeviceConfigurationTableV<br>ersion5 8-1|Konfigurationstabelle der Version des Geräts an Instanz 5 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**156**|HardwareVersion5 16-9|HardwareVersion5 8-1|Hardwareversion des Geräts an Instanz 5 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**157**|ArticleNumber5 32-25|ArticleNumber5 24-17|Artikelnummer des Geräts an Instanz 5 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**158**|ArticleNumber5 16-9|ArticleNumber5 8-1|||||
-||||||||
 |**159**|DeviceTypeBoard6 16-9|DeviceTypeBoard6 8-1|Gerätetyp an Instanz 6 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**160**|SoftwareVersion6 16-9|SoftwareVersion6 8-1|Softwareversion des Geräts an Instanz 6 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**161**|DeviceConfigurationTabl<br>eVersion6 16-9|DeviceConfigurationTableV<br>ersion6 8-1|Konfigurationstabelle der Version des Geräts an Instanz 6 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**162**|HardwareVersion6 16-9|HardwareVersion6 8-1|Hardwareversion des Geräts an Instanz 6 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
-
-
 |**163**|ArticleNumber6 32-25|ArticleNumber6 24-17|Artikelnummer des Geräts an Instanz 6 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
-|---|---|---|---|---|---|---|
 |**164**|ArticleNumber6 16-9|ArticleNumber6 8-1|||||
-||||||||
 |**165**|DeviceTypeBoard7 16-9|DeviceTypeBoard7 8-1|Gerätetyp an Instanz 7 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**166**|SoftwareVersion7 16-9|SoftwareVersion7 8-1|Softwareversion des Geräts an Instanz 7 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**167**|DeviceConfigurationTabl<br>eVersion7 16-9|DeviceConfigurationTableV<br>ersion7 8-1|Konfigurationstabelle der Version des Geräts an Instanz 7 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**168**|HardwareVersion7 16-9|HardwareVersion7 8-1|Hardwareversion des Geräts an Instanz 7 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**169**|ArticleNumber7 32-25|ArticleNumber7 24-17|Artikelnummer des Geräts an Instanz 7 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**170**|ArticleNumber7 16-9|ArticleNumber7 8-1|||||
-||||||||
 |**171**|DeviceTypeBoard8 16-9|DeviceTypeBoard8 8-1|Gerätetyp an Instanz 8 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**172**|SoftwareVersion8 16-9|SoftwareVersion8 8-1|Softwareversion des Geräts an Instanz 8 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**173**|DeviceConfigurationTabl<br>eVersion8 16-9|DeviceConfigurationTableV<br>ersion8 8-1|Konfigurationstabelle der Version des Geräts an Instanz 8 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**174**|HardwareVersion8 16-9|HardwareVersion8 8-1|Hardwareversion des Geräts an Instanz 8 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**175**|ArticleNumber8 32-25|ArticleNumber8 24-17|Artikelnummer des Geräts an Instanz 8 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**176**|ArticleNumber8 16-9|ArticleNumber8 8-1|||||
-||||||||
 |**177**|DeviceTypeBoard9 16-9|DeviceTypeBoard9 8-1|Gerätetyp an Instanz 9 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**178**|SoftwareVersion9 16-9|SoftwareVersion9 8-1|Softwareversion des Geräts an Instanz 9 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**179**|DeviceConfigurationTabl<br>eVersion9 16-9|DeviceConfigurationTableV<br>ersion9 8-1|Konfigurationstabelle der Version des Geräts an Instanz 9 (CU-EHC, EEC,<br>SCB,...)|Read|UNSIGNED16|2001.13|
 |**180**|HardwareVersion9 16-9|HardwareVersion9 8-1|Hardwareversion des Geräts an Instanz 9 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**181**|ArticleNumber9 32-25|ArticleNumber9 24-17|Artikelnummer des Geräts an Instanz 9 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**182**|ArticleNumber9 16-9|ArticleNumber9 8-1|||||
-
-
-||||||||
 |---|---|---|---|---|---|---|
 |**183**|DeviceTypeBoard10 16-9|DeviceTypeBoard10 8-1|Gerätetyp an Instanz 10 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**184**|SoftwareVersion10 16-9|SoftwareVersion10 8-1|Softwareversion des Geräts an Instanz 10 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
@@ -333,7 +303,6 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**186**|HardwareVersion10 16-9|HardwareVersion10 8-1|Hardwareversion des Geräts an Instanz 10 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|Internal<br>Variables|
 |**187**|ArticleNumber10 32-25|ArticleNumber10 24-17|Artikelnummer des Geräts an Instanz 10 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED32|2001.12|
 |**188**|ArticleNumber10 16-9|ArticleNumber10 8-1|||||
-||||||||
 |**189**||NumberOfZones|Anzahl der auf dem Gerät vorhandenen Kreise|Read|UNSIGNED8|Internal<br>Variables|
 |**190**||NumberOfZonesDisabled|Anzahl der auf dem Gerät deaktivierten Kreise|Read|UNSIGNED8||
 |**191**||NumberOfZonesCH|Anzahl der auf dem Gerät vorhandenen Heizkreise|Read|UNSIGNED8||
@@ -373,10 +342,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 ||||1 Frostschutz nur Pumpe||||
 ||||2 Schornsteinfeger-/Inbetriebnahmemodus||||
 ||||3 Wartungsanforderung||||
-
-
 |**277**|Appliance Error 16-9|Appliance Error 8-1|Aktueller Fehler Gerät (0xFFFFFF bedeutet kein Fehler)|Read|UNSIGNED16|PDO mapping|
-|---|---|---|---|---|---|---|
 |**278**|||Priorität Gerätefehler|Read|ENUM8|PDO mapping|
 ||||0: Verriegelung||||
 ||-|Appliance Error Priority|3: Sperrung||||
@@ -403,10 +369,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**290**|varChCtrBurnHours 32-25|varChCtrBurnHours 24-17|Zähler Brennerstunden|Read|UNSIGNED32|530C.0|
 |**291**|varChCtrBurnHours 16-9|varChCtrBurnHours  8-1|Zähler Brennerstunden|Read|UNSIGNED32||
 |**292**|varApCtrServiceBurningHo<br>urs 16-9|varApCtrServiceBurningHours 8-1|Anzahl der Stunden, in denen das Gerät nach der Wartung in<br>Betrieb war|Read|UNSIGNED16|5040.0|
-
-
 |**293**|varApCtrServiceBurnerStar<br>ts 32-25|varApCtrServiceBurnerStarts 24-17|Anzahl erfolgreicher Verdichterstarts nach der Wartung|Read|UNSIGNED32|5042.0|
-|---|---|---|---|---|---|---|
 |**294**|varApCtrServiceBurnerStar<br>ts 16-9|varApCtrServiceBurnerStarts 8-1|Anzahl erfolgreicher Verdichterstarts nach der Wartung|Read|UNSIGNED32||
 |**295**|varApCtrBackup1Starts 32-<br>25|varApCtrBackup1Starts 24-17|Zähler Starts Zusatzerzeuger 1|Read|UNSIGNED32|50B1.0|
 |**296**|varApCtrBackup1Starts 16-<br>9|varApCtrBackup1Starts 8-1|Zähler Starts Zusatzerzeuger 1|Read|UNSIGNED32||
@@ -444,10 +407,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**405**|varApInternalSetpoint 16 -9|varApInternalSetpoint 8 -1|Interner Sollwert für die Trinkwarmwasserbereitung|Read|UNSIGNED16|50A9.0|
 |**406**|varChSetpoint 16 -9|varChSetpoint 8 -1|Heizungssollwert der Anlage|Read|UNSIGNED16|5302.0|
 |**407**|varHpCoolingSetpoint 16 -9|varHpCoolingSetpoint 8 -1|Vorlauftemperatur-Sollwert im Kühlmodus|Read|UNSIGNED16|4321.0|
-
-
 |**408**|varDhwFlowTempSetpoint 16 -9|varDhwFlowTempSetpoint 8 -1|Vorlauftemperatur-Sollwert<br>Trinkwarmwasserbereitung|Read|UNSIGNED16|5604.0|
-|---|---|---|---|---|---|---|
 |**409**||varApWaterPressure|Aktueller Wasserdruck|Read|UNSIGNED8|5016.0|
 |**410**|varApFlowmeter 16 -9|varApFlowmeter 8 -1|Durchfluss|Read|UNSIGNED16|5083.0|
 |**411**||varApStatus|Gerätestatus|Read|ENUM8|500F.0|
@@ -473,10 +433,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**431**|varApCtrHoursTotal16-9|varApCtrHoursTotal 8-1|Betriebsstundenzahl|Read|UNSIGNED32|5000.0|
 |**432**|varApCtrHoursTotal16-9|varApCtrHoursTotal 8-1|Betriebsstundenzahl|Read|UNSIGNED32||
 |**433**|varApChEnergyConsumption 32-25|varApChEnergyConsumption 24-17|NGesamtenergieverbrauch für Heizung|Read|UNSIGNED32|5044.0|
-
-
 |**434**|varApChEnergyConsumption 16-9|varApChEnergyConsumption 8-1|Gesamtenergieverbrauch für Heizung|Read|UNSIGNED32||
-|---|---|---|---|---|---|---|
 |**435**|varApDhwEnergyConsumption 32-<br>25|varApDhwEnergyConsumption 24-17|Gesamtenergieverbrauch für die<br>Trinkwasserbereitung.|Read|UNSIGNED32|5045.0|
 |**436**|varApDhwEnergyConsumption 16-<br>9|varApDhwEnergyConsumption 8-1|Gesamtenergieverbrauch für die<br>Trinkwasserbereitung.|Read|UNSIGNED32||
 |**437**|varApCoolingEnergyConsumption<br>32-25|varApCoolingEnergyConsumption 24-17|Gesamtenergieverbrauch für die Kühlung|Read|UNSIGNED32|5046.0|
@@ -506,10 +463,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**534**|varACurrentError3 16-9|varACurrentError2 8-1|Code Fehler des Geräts an Instanz 2 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
 |**535**||ErroPriority2|Fehlerstufe des Fehlers am Gerät an Instanz 2<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
 |**536**|varACurrentError3 16-9|varACurrentError3 8-1|Code Fehler des Geräts an Instanz 3 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
-
-
 |**537**||ErroPriority3|Fehlerstufe des Fehlers am Gerät an Instanz 3<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
-|---|---|---|---|---|---|---|
 |**538**|varACurrentError4 16-9|varACurrentError4 8-1|Code Fehler des Geräts an Instanz 4 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
 |**539**||ErroPriority4|Fehlerstufe des Fehlers am Gerät an Instanz 4<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
 |**540**|varACurrentError5 16-9|varACurrentError5 8-1|Code Fehler des Geräts an Instanz 5 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
@@ -522,10 +476,7 @@ Signed Integer16 = -32768 (0x8000) Signed Integer32 = -2147483648 (0x8000000)
 |**547**||ErroPriority8|Fehlerstufe des Fehlers am Gerät an Instanz 8<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
 |**548**|varACurrentError9 16-9|varACurrentError9 8-1|Code Fehler des Geräts an Instanz 9 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
 |**549**||ErroPriority9|Fehlerstufe des Fehlers am Gerät an Instanz 9<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
-
-
 |**550**|varACurrentError10 16-9|varACurrentError10 8-1|Code Fehler des Geräts an Instanz 10 (CU-EHC, EEC, SCB, ...)|Read|UNSIGNED16|1003.1|
-|---|---|---|---|---|---|---|
 |**551**||ErroPriority10|Fehlerstufe des Fehlers am Gerät an Instanz 10<br>0: Verriegelung<br>3: Sperrung<br>6: Warnung|Read|ENUM8|2004.1|
 
 
@@ -547,10 +498,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |Zone 10|5248 -> 5759|
 |Zone 11|5760 -> 6271|
 |Zone 12|6272 -> 6783|
-
-
 |**Modbus**|**Daten**||**Beschreibung**|**Zugang**|**Anmerkung**|**Datenpunkte**<br>**index.**<br>**SubIndex**<br>**HZG/TWW**<br>**Sekundärkreise**|**Datenpunkte**<br>**index.**<br>**SubIndex**<br>**TWW Primär**|
-|---|---|---|---|---|---|---|---|
 |**Adresse**|MSB|LSB||||||
 |**640**||varZoneTypesss|Art des angeforderten<br>Kreises<br>0: nicht vorhanden<br>1: nur HZG<br>2: HZG + KÜHLUNG<br>3: TWW<br>4: Prozesswärme<br>5: Schwimmbad<br>254: Sonstige (z.B.<br>Zeitprogramm)|Read|ENUM8|InternalVariable|InternalVariable|
 |**641**||parZoneFunction|Funktion des Kreises<br>0: deaktiviert<br>1: ungemischt<br>2: Mischerkreis<br>3: Schwimmbad<br>4: Hochtemperatur<br>5: Gebläsekonvektor<br>6: TWW-Speicher<br>7: Elektr. TWW-Speicher<br>8: Zeitprogramm<br>9: Prozesswärme<br>10: TWW Schichten<br>11: TWW BIC<br>12: Gewerbl. WW-<br>Speicher<br>254: TWW primär|Read|ENUM8|InternalVariable|InternalVariable|
@@ -559,10 +507,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**644**|parZoneFriendlyNameShort Byte 4|Rotary Switch||||||
 |**645**|DeviceType 16-9|DeviceType 8-1|Gerätetyp der Platine, auf<br>der sich der Kreis<br>befindet|Read|UNSIGNED16|InternalVariable|InternalVariable|
 |**646**||instance|Geräteinstanz, zu der der<br>Kreisgehört|Read|UNSIGNED8|InternalVariable|InternalVariable|
-
-
 |**647**||||||||
-|---|---|---|---|---|---|---|---|
 |**648**|parZoneTFlowSetpoint 16-9|parZoneTFlowSetpoint 8-1|Temperatursollwert für<br>Kreis, wenn Außenfühler<br>fehlt|Read/Write|UNSIGNED16|3402.n|Not Available|
 |**649**||parZoneMode|Modus arbeitende Zone<br>0: Zeitprogramm 1:<br>Manuell 2: Frostschutz|Read/Write|ENUM8|341F.n|3661.n|
 |**650**|parZoneRoomUserActivitySetpoint1 16-9|parZoneRoomUserActivitySetpoint1 8-1|Temperatursollwert der<br>Benutzeraktivitätje Kreis|Read/Write|UNSIGNED16|340C.n|Not Available|
@@ -577,10 +522,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**659**|parZoneRoomCoolingSetpoint4 16-9|parZoneRoomCoolingSetpoint4 8-1|Raumtemperatursollwert<br>der Benutzeraktivität je<br>Kreis im Kühlbetrieb|Read/Write|UNSIGNED16|3412.n|Not Available|
 |**660**|parZoneRoomCoolingSetpoint5 16-9|parZoneRoomCoolingSetpoint5 8-1|Raumtemperatursollwert<br>der Benutzeraktivität je<br>Kreis im Kühlbetrieb|Read/Write|UNSIGNED16|3412.n|Not Available|
 |**661**|parZoneAmbiantCoolingNightSetpoint 16-9|parZoneAmbiantCoolingNightSetpoint 8-1|Raumsollwert zur<br>Umschaltung von<br>Komfort auf Reduziert im<br>Heizbetrieb|Read/Write|UNSIGNED16|3460.n|Not Available|
-
-
 |**662**|parZoneAmbiantHolidaySetpoint 16-9|parZoneAmbiantHolidaySetpoint 8-1|Gewünschter<br>Raumtemperatur des<br>Kreises in der Ferienzeit|Read/Write|UNSIGNED16|340A.n|Not Available|
-|---|---|---|---|---|---|---|---|
 |**663**|parZoneTemporaryRoomSetpoint 16-9|parZoneTemporaryRoomSetpoint 8-1|Vorrübergehender<br>Raumsollwertje Kreis|Read/Write|UNSIGNED16|3451.n|Not Available|
 |**664**|parZoneRoomManualSetpoint 16-9|parZoneRoomManualSetpoint 8-1|Manuell eingestellter<br>gewünschter<br>Raumtemperatur-<br>Sollwert des Kreises|Read/Write|UNSIGNED16|3413.n|Not Available|
 |**665**|parZoneDhwComfortSetpoint 16-9|parZoneDhwComfortSetpoint  8-1|Gewünschte Komfort-<br>Warmwassertemperatur|Read/Write|UNSIGNED16|3425.n|3654.n|
@@ -591,10 +533,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**670**|parZoneProcessHeatSetpoint 16 -9|parZoneProcessHeatSetpoint 8 -1|Sollwert während<br>"Prozesswärme"-<br>Heizanforderung|Read/Write|UNSIGNED16|345B.n|3654.n|
 |**671**||parZoneHeatingControlStrategy|Verwenden Sie die<br>Raumregelung und/oder<br>witterungsgeführte<br>Regelstrategien zur<br>Berechnung des<br>Vorlaufsollwerts<br>0: AUTO<br>1: Raum<br>2: Außen<br>3: Außen + Raum|Read/Write|ENUM8|3471.n|Not Available|
 |**672**|parZoneTFlowSetpointMax 16-9|parZoneTFlowSetpointMax 8-1|Max. Vorlauftemperatur-<br>Sollwert des Kreises|Read/Write|UNSIGNED16|3401.n|362F.0|
-
-
 ||||ARR|||||
-|---|---|---|---|---|---|---|---|
 |**673**|parZoneTFlowCoolingMixingSetpoint 16-9|parZoneTFlowCoolingMixingSetpoint  8-1|Erforderlicher<br>Vorlauftemperatur-<br>Sollwert beim Kühlen|Read/Write|UNSIGNED16|341A.n|Not Available|
 |**674**||parZoneSlope|Steigung der<br>Heizkennlinie des Kreises|Read/Write|UNSIGNED8|3416.n|Not Available|
 |**675**|parZoneHCZPD 16-9|parZoneHCZPD 8-1|Grundtemperatur der<br>Heizkennlinie im<br>Komfortbetrieb|Read/Write|UNSIGNED16|3414.n|Not Available|
@@ -605,10 +544,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**680**|parZoneDhwHysterisis 16-9|parZoneDhwHysterisis 8-1|Hysterese TWW<br>Speicherladung|Read/Write|UNSIGNED16|342C.n|3606.0|
 |**681**|parZoneDhwCalorifierOffset 16-9|parZoneDhwCalorifierOffset 8-1|Verschiebung TWW-<br>Bereiter|Read/Write|UNSIGNED16|3467.n|3622.0|
 |**682**|parZoneDhwCalorifierSetpointRaise 16-9|parZoneDhwCalorifierSetpointRaise 8-1|Vorlauftemperatur-<br>Sollwert über die<br>erforderliche<br>Speichertemperatur Delta<br>T erhöhen, um den<br>Speicher zu erwärmen|Read/Write|UNSIGNED16|3468.n|3605.0|
-
-
 |**683**|parZoneProcessHeatHysterisis 16-9|parZoneProcessHeatHysterisis 8-1|Hysterese für<br>Prozesswärme pro Kreis<br>eingeschaltet|Read/Write|UNSIGNED16|345C.n|Not Available|
-|---|---|---|---|---|---|---|---|
 |**684**|parZoneProcessHeatOffset 16-9|parZoneProcessHeatOffset 8-1|Hysterese für<br>Prozesswärme pro Kreis<br>ausgeschaltet|Read/Write|UNSIGNED16|345D.n|Not Available|
 |**685**|parZoneProcessHeatCalorifierSetpointRaise<br>16-9|parZoneProcessHeatCalorifierSetpointRaise<br>8-1|Vorlauftemperatur-<br>Sollwert über die<br>erforderliche<br>Speichertemperatur Delta<br>T erhöhen, um den<br>Speicher zu erwärmen|Read/Write|UNSIGNED16|3469.n|Not Available|
 |**686**|parZoneDhwCalorifierHysterisis 16-9|parZoneDhwCalorifierHysterisis 8-1|Hysterese zum Starten<br>der<br>Warmwasserbereitung|Read/Write|UNSIGNED16|342C.n|3659.n|
@@ -626,10 +562,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**698**|parZoneTimeProgramMonday1 Byte 18|||||||
 |**699**|parZoneTimeProgramTuesday1 Byte 0|parZoneTimeProgramTuesday1 Byte 1||Read/Write|OCTET_STRING|3432.n|363F.n|
 |**700**|parZoneTimeProgramTuesday1 Byte 2|parZoneTimeProgramTuesday1 Byte 3||||||
-
-
 |**701**|parZoneTimeProgramTuesday1 Byte 4|parZoneTimeProgramTuesday1 Byte 5||||||
-|---|---|---|---|---|---|---|---|
 |**702**|parZoneTimeProgramTuesday1 Byte 6|parZoneTimeProgramTuesday1 Byte 7||||||
 |**703**|parZoneTimeProgramTuesday1 Byte 8|parZoneTimeProgramTuesday1 Byte 9||||||
 |**704**|parZoneTimeProgramTuesday1 Byte 10|parZoneTimeProgramTuesday1 Byte 11||||||
@@ -656,10 +589,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**725**|parZoneTimeProgramThursday1 Byte 12|parZoneTimeProgramThursday1 Byte 13||||||
 |**726**|parZoneTimeProgramThursday1 Byte 14|parZoneTimeProgramThursday1 Byte 15||||||
 |**727**|parZoneTimeProgramThursday1 Byte 16|parZoneTimeProgramThursday1 Byte 17||||||
-
-
 |**728**|parZoneTimeProgramThursday1 Byte 18|||||||
-|---|---|---|---|---|---|---|---|
 |**729**|parZoneTimeProgramFriday1 Byte 0|parZoneTimeProgramFriday1 Byte 1||Read/Write|OCTET_STRING|3435.n|3642.n|
 |**730**|parZoneTimeProgramFriday1 Byte 2|parZoneTimeProgramFriday1 Byte 3||||||
 |**731**|parZoneTimeProgramFriday1 Byte 4|parZoneTimeProgramFriday1 Byte 5||||||
@@ -686,10 +616,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**752**|parZoneTimeProgramSunday1 Byte 6|parZoneTimeProgramSunday1 Byte 7||||||
 |**753**|parZoneTimeProgramSunday1 Byte 8|parZoneTimeProgramSunday1 Byte 9||||||
 |**754**|parZoneTimeProgramSunday1 Byte 10|parZoneTimeProgramSunday1 Byte 11||||||
-
-
 |**755**|parZoneTimeProgramSunday1 Byte 12|parZoneTimeProgramSunday1 Byte 13||||||
-|---|---|---|---|---|---|---|---|
 |**756**|parZoneTimeProgramSunday1 Byte 14|parZoneTimeProgramSunday1 Byte 15||||||
 |**757**|parZoneTimeProgramSunday1 Byte 16|parZoneTimeProgramSunday1 Byte 17||||||
 |**758**|parZoneTimeProgramSunday1 Byte 18|||||||
@@ -716,10 +643,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**779**|parZoneTimeProgramWednesday2 Byte 0|parZoneTimeProgramWednesday2 Byte 1||Read/Write|OCTET_STRING|343A.n|3647.n|
 |**780**|parZoneTimeProgramWednesday2 Byte 2|parZoneTimeProgramWednesday2 Byte 3||||||
 |**781**|parZoneTimeProgramWednesday2 Byte 4|parZoneTimeProgramWednesday2 Byte 5||||||
-
-
 |**782**|parZoneTimeProgramWednesday2 Byte 6|parZoneTimeProgramWednesday2 Byte 7||||||
-|---|---|---|---|---|---|---|---|
 |**783**|parZoneTimeProgramWednesday2 Byte 8|parZoneTimeProgramWednesday2 Byte 9||||||
 |**784**|parZoneTimeProgramWednesday2 Byte 10|parZoneTimeProgramWednesday2 Byte 11||||||
 |**785**|parZoneTimeProgramWednesday2 Byte 12|parZoneTimeProgramWednesday2 Byte 13||||||
@@ -746,10 +670,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**806**|parZoneTimeProgramFriday2 Byte 14|parZoneTimeProgramFriday2 Byte 15||||||
 |**807**|parZoneTimeProgramFriday2 Byte 16|parZoneTimeProgramFriday2 Byte 17||||||
 |**808**|parZoneTimeProgramFriday2 Byte 18|||||||
-
-
 |**809**|parZoneTimeProgramSaturday2  Byte 0|parZoneTimeProgramSaturday2  Byte 1||Read/Write|OCTET_STRING|343D.n|364A.n|
-|---|---|---|---|---|---|---|---|
 |**810**|parZoneTimeProgramSaturday2  Byte 2|parZoneTimeProgramSaturday2  Byte 3||||||
 |**811**|parZoneTimeProgramSaturday2  Byte 4|parZoneTimeProgramSaturday2  Byte 5||||||
 |**812**|parZoneTimeProgramSaturday2  Byte 6|parZoneTimeProgramSaturday2  Byte 7||||||
@@ -776,10 +697,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**833**|parZoneTimeProgramMonday3 Byte 8|parZoneTimeProgramMonday3 Byte 9||||||
 |**834**|parZoneTimeProgramMonday3 Byte 10|parZoneTimeProgramMonday3 Byte 11||||||
 |**835**|parZoneTimeProgramMonday3 Byte 12|parZoneTimeProgramMonday3 Byte 13||||||
-
-
 |**836**|parZoneTimeProgramMonday3 Byte 14|parZoneTimeProgramMonday3 Byte 15||||||
-|---|---|---|---|---|---|---|---|
 |**837**|parZoneTimeProgramMonday3 Byte 16|parZoneTimeProgramMonday3 Byte 17||||||
 |**838**|parZoneTimeProgramMonday3 Byte 18|||||||
 |**839**|parZoneTimeProgramTuesday3 Byte 0|parZoneTimeProgramTuesday3 Byte 1||Read/Write|OCTET_STRING|3440.n|364D.n|
@@ -806,10 +724,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**860**|parZoneTimeProgramThursday3 Byte 2|parZoneTimeProgramThursday3 Byte 3||||||
 |**861**|parZoneTimeProgramThursday3 Byte 4|parZoneTimeProgramThursday3 Byte 5||||||
 |**862**|parZoneTimeProgramThursday3 Byte 6|parZoneTimeProgramThursday3 Byte 7||||||
-
-
 |**863**|parZoneTimeProgramThursday3 Byte 8|parZoneTimeProgramThursday3 Byte 9||||||
-|---|---|---|---|---|---|---|---|
 |**864**|parZoneTimeProgramThursday3 Byte 10|parZoneTimeProgramThursday3 Byte 11||||||
 |**865**|parZoneTimeProgramThursday3 Byte 12|parZoneTimeProgramThursday3 Byte 13||||||
 |**866**|parZoneTimeProgramThursday3 Byte 14|parZoneTimeProgramThursday3 Byte 15||||||
@@ -836,10 +751,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**887**|parZoneTimeProgramSaturday3 Byte 16|parZoneTimeProgramSaturday3 Byte 17||||||
 |**888**|parZoneTimeProgramSaturday3 Byte 18|||||||
 |**889**|parZoneTimeProgramSunday3Byte 0|parZoneTimeProgramSunday3Byte 1||Read/Write|OCTET_STRING|3445.n|3652.n|
-
-
 |**890**|parZoneTimeProgramSunday3Byte 2|parZoneTimeProgramSunday3Byte 3||||||
-|---|---|---|---|---|---|---|---|
 |**891**|parZoneTimeProgramSunday3Byte 4|parZoneTimeProgramSunday3Byte 5||||||
 |**892**|parZoneTimeProgramSunday3Byte 6|parZoneTimeProgramSunday3Byte 7||||||
 |**893**|parZoneTimeProgramSunday3Byte 8|parZoneTimeProgramSunday3Byte 9||||||
@@ -866,10 +778,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**914**|parZoneTimeProgramTuesday4 Byte 10|parZoneTimeProgramTuesday4 Byte 11||||||
 |**915**|parZoneTimeProgramTuesday4 Byte 12|parZoneTimeProgramTuesday4 Byte 13||||||
 |**916**|parZoneTimeProgramTuesday4 Byte 14|parZoneTimeProgramTuesday4 Byte 15||||||
-
-
 |**917**|parZoneTimeProgramTuesday4 Byte 16|parZoneTimeProgramTuesday4 Byte 17||||||
-|---|---|---|---|---|---|---|---|
 |**918**|parZoneTimeProgramTuesday4 Byte 18|||||||
 |**919**|parZoneTimeProgramWednesday4Byte 0|parZoneTimeProgramWednesday4Byte 1||Read/Write|OCTET_STRING|3448.n|Not Available|
 |**920**|parZoneTimeProgramWednesday4Byte 2|parZoneTimeProgramWednesday4Byte 3||||||
@@ -896,10 +805,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**941**|parZoneTimeProgramFriday4Byte 4|parZoneTimeProgramFriday4Byte 5||||||
 |**942**|parZoneTimeProgramFriday4Byte 6|parZoneTimeProgramFriday4Byte 7||||||
 |**943**|parZoneTimeProgramFriday4Byte 8|parZoneTimeProgramFriday4Byte 9||||||
-
-
 |**944**|parZoneTimeProgramFriday4Byte 10|parZoneTimeProgramFriday4Byte 11||||||
-|---|---|---|---|---|---|---|---|
 |**945**|parZoneTimeProgramFriday4Byte 12|parZoneTimeProgramFriday4Byte 13||||||
 |**946**|parZoneTimeProgramFriday4Byte 14|parZoneTimeProgramFriday4Byte 15||||||
 |**947**|parZoneTimeProgramFriday4Byte 16|parZoneTimeProgramFriday4Byte 17||||||
@@ -926,10 +832,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**968**|parZoneTimeProgramSunday4Byte 18|||||||
 |**969**||||||||
 |**970**||||||||
-
-
 |**971**|parZoneStartTimeHoliday Byte 0|parZoneStartTimeHoliday Byte 1|Startzeit Ferienbetrieb<br>ZeitStempel CIA|Read/Write|OCTET_STRING|3421.n|365E.n|
-|---|---|---|---|---|---|---|---|
 |**972**|parZoneStartTimeHoliday Byte 2|parZoneStartTimeHoliday Byte 3||||||
 |**973**|parZoneStartTimeHoliday Byte 4|parZoneStartTimeHoliday Byte 5||||||
 |**974**|parZoneEndTimeHoliday Byte 0|parZoneEndTimeHoliday Byte 1|Endzeit Ferienbetrieb<br>ZeitStempel|Read/Write|OCTET_STRING|3422.n|365F.n|
@@ -941,7 +844,6 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**980**|parZoneEndTimeModeChange Byte 4|parZoneEndTimeModeChange Byte 5||||||
 |**981-**<br>**1099**||||||||
 |||reserved for futur|use|||||
-|||||||||
 |**1100**|varZoneTflow 16-9|varZoneTflow 8-1|Temperatur des in dem<br>Kreis fließenden Wassers.<br>Im Fall von TWW ist dies<br>die Temperatur des<br>austretenden<br>Trinkwarmwassers.|Read|INTEGER16|5405.n|501A.0|
 |**1101**|varZoneTemperatureSetpoint 16 -9|varZoneTemperatureSetpoint 8-1|Aktueller<br>Vorlauftemperatur-<br>Sollwert|Read|UNSIGNED16|5408.n|5604.0|
 |**1102**|varZoneTRoomSetpoint 16 -9|varZoneTRoomSetpoint 8-1|Aktuell gewünschter<br>Raumtemperatur-<br>Sollwert|Read|INTEGER16|5419.n|Not Available|
@@ -949,10 +851,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**1104**|varZoneTRoom 16 -9|varZoneTRoom 8-1|Aktuelle Raumtemperatur<br>für den Kreis|Read|INTEGER16|5404.n|Not Available|
 |**1105**|varZoneRoomTemperatureMeasured 16 -9|varZoneRoomTemperatureMeasured 8-1|Raumtemperaturmessung<br>mit hoher Auflösung für<br>die Regelung der<br>Raumtemperatur des<br>Kreismoduls|Read/Write|INTEGER16|5434.n|Not Available|
 |**1106**||varZoneHdOnOffDemand|Ein/Aus Heizanforderung<br>aktiv<br>0: AUS|Read|ENUM8|5415.n|Not Available|
-
-
 ||||1: EIN|||||
-|---|---|---|---|---|---|---|---|
 |**1107**||varZoneCurrentActivities|Aktuelle Aktivität des<br>aktiven Kreises<br>0: Frostschutz<br>1: Reduziert<br>2: Komfort<br>3: Legionellenschutz|Read|ENUM8|5413.n|560F.n|
 |**1108**||varZoneCurrentMode|Aktuelle Betriebsart des<br>Kreises<br>0: Zeitprogramm<br>1: Manuell<br>2: Frostschutz<br>3: Temporär<br>4: Ferien|Read|ENUM8|5410.n|560E.n|
 |**1109**||varZoneCurrentHeatingMode|Aktueller Modus, in dem<br>der Kreis arbeitet.<br>0: Standby<br>1: Heizung<br>2: Kühlen|Read|ENUM8|541D.n|Not Available|
@@ -961,10 +860,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**1112**||varZoneMvdOpening|Mischventil offen 1: ja 0:<br>nein|Read|ENUM8|5403.n|Not Available|
 |**1113**||varZoneSecondarySwimmingPoolpumpStatus|Status der<br>Sekundärpumpe für<br>Schwimmbad<br>0: AUS<br>1: EIN|Read|ENUM8|5437.n|Not Available|
 |**1114**||varZoneElectricalBackupOutputStatus|Ausgangsstatus für<br>elektrischen<br>Zusatzerzeuger<br>0: AUS<br>1: EIN|Read|ENUM8|5438.n|Not Available|
-
-
 |**1115**|varZoneCtrPumpRunHours 32-25|varZoneCtrPumpRunHours 24-17|Anzahl der Stunden, in<br>denen die Pumpe laufen<br>muss|Read|UNSIGNED32|541A.n|560D.0|
-|---|---|---|---|---|---|---|---|
 |**1116**|varZoneCtrPumpRunHours 16-9|varZoneCtrPumpRunHours 8-1|Anzahl der Stunden, in<br>denen die Pumpe laufen<br>muss|Read|UNSIGNED32|||
 |**1117**|varZoneCtrPumpStarts 32-25|varZoneCtrPumpStarts 24-17|Anzahl der Pumpenstarts|Read|UNSIGNED32|541B.n|560A.0|
 |**1118**|varZoneCtrPumpStarts 16-9|varZoneCtrPumpStarts 8-1|Anzahl der Pumpenstarts|Read|UNSIGNED32|||
@@ -984,13 +880,9 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7004**||parCascadeInterStageTime|Ein- und<br>Ausschaltverzögerung<br>der Erzeuger|Read/<br>Write|UNSIGNED8|3709.0|
 |**7005**|parCascadeParallelHeatingOutsideTemperatureTrigge<br>r 16 -9|parCascadeParallelHeatingOutsideTemperatureTrigg<br>er 8 -1|Außentemperatur, ab<br>der alle Stufen im<br>Parallelbetrieb aktiviert<br>werden|Read/<br>Write|INTEGER16|3707.0|
 |**7006**|parCascadeParallelCoolingOutsideTemperatureTrigge<br>r 16 -9|parCascadeParallelCoolingOutsideTemperatureTrigg<br>er 8 -1|Außentemperatur, ab<br>der alle Stufen im<br>Parallelbetrieb aktiviert<br>werden|Read/<br>Write|INTEGER16|370A.0|
-
-
 |**7007**||parCascadePowerRiseTime|Anstiegszeit bis zum<br>Erreichen des Sollwerts|Read/<br>Write|UNSIGNED8|370C.0|
-|---|---|---|---|---|---|---|
 |**7008-**<br>**7099**|||||||
 |||Für Zukunft reserviert|||||
-||||||||
 |**7100**||varCascadeNumberProducerFirstStart|Aktive Nummer des<br>Herstellers|Read|UNSIGNED8|5700.0|
 |**7101**|varProducerManagerSystemFlowTemperature 16 -9|varProducerManagerSystemFlowTemperature 8 -1|Vorlauftemperatur<br>Kaskade|Read|INTEGER16|5701.0|
 |**7102**||varCascadeNumberProducersPresent|Anzahl der in der<br>Kaskade erkannten<br>Erzeuger|Read|UNSIGNED8|571C.0|
@@ -1001,10 +893,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7107**||varCascadeSystemPowerRequest Byte 4|Kaskaden-<br>Leistungsanforderung<br>durch den<br>Verbrauchermanager -<br>HeizanforderungArt|Read|UNSIGNED8||
 |**7108**||varCascadeSystemPowerSetpointCalculated Byte 1|Berechneter<br>Kaskadenleistungssollwe<br>rt - Leistung|Read|UNSIGNED8|571E.0|
 |**7109**|varCascadeSystemPowerSetpointCalculated Byte 3|varCascadeSystemPowerSetpointCalculated Byte 2|Berechneter<br>Kaskadenleistungssollwe<br>rt - Temperatursollwert|Read|INTEGER16||
-
-
 |**7110**||varCascadeSystemPowerSetpointCalculated Byte 4|Berechneter<br>Kaskadenleistungssollwe<br>rt - HeizanforderungArt|Read|ENUM8||
-|---|---|---|---|---|---|---|
 |**7111**||PowerActualReceived1|Aktuelle Leistung des<br>Gerätes 1|Read|UNSIGNED8|570B.1|
 |**7112**|FlowTemperatureReceived1 16-9|FlowTemperatureReceived1 8-1|Gerät 1<br>Vorlauftemperatur|Read|INTEGER16|570C.1|
 |**7113**|-|ProducerManagerStatusBitfieldReceived1|Gerät 1 Status<br>0 Pumpe aktiv|Read|UNSIGNED8|570d.1|
@@ -1024,10 +913,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7117**|-|ProducerManagerStatusBitfieldReceived3|Gerät 3 Status<br>0 Pumpe aktiv|Read|UNSIGNED8|570d.3|
 ||||1 Leistungsmotor aktiv<br>(Brenner, Verdichter<br>oder Zusatzerzeuger)||||
 ||||2 TWW wird erzeugt||||
-
-
 ||||3 HZG möglich||||
-|---|---|---|---|---|---|---|
 ||||4 TWW möglich||||
 ||||5 Kühlung möglich||||
 ||||6 Elektrisch möglich||||
@@ -1049,10 +935,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7122**|-|ProducerManagerRequestReceived4|Gerät 4 Spezielle<br>Anforderung<br>0 Frostschutz|Read|UNSIGNED8|570E.4|
 ||||1 Frostschutz nur Pumpe||||
 ||||2 Schornsteinfeger-<br>/Inbetriebnahmemodus||||
-
-
 ||||3 Wartungsanforderung||||
-|---|---|---|---|---|---|---|
 |**7123**||PowerActualReceived5|Aktuelle Leistung des<br>Gerätes 5|Read|UNSIGNED8|570B.5|
 |**7124**|FlowTemperatureReceived5 16-9|FlowTemperatureReceived5 8-1|Gerät 5<br>Vorlauftemperatur|Read|INTEGER16|570C.5|
 |**7125**|-|ProducerManagerStatusBitfieldReceived5|Gerät 5 Status<br>0 Pumpe aktiv|Read|UNSIGNED8|570d.5|
@@ -1073,10 +956,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 ||||1 Leistungsmotor aktiv<br>(Brenner, Verdichter<br>oder Zusatzerzeuger)||||
 ||||2 TWW wird erzeugt||||
 ||||3 HZG möglich||||
-
-
 ||||4 TWW möglich||||
-|---|---|---|---|---|---|---|
 ||||5 Kühlung möglich||||
 ||||6 Elektrisch möglich||||
 ||||7 Verriegelung<br>vorhanden||||
@@ -1098,10 +978,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 ||||1 Frostschutz nur Pumpe||||
 ||||2 Schornsteinfeger-<br>/Inbetriebnahmemodus||||
 ||||3 Wartungsanforderung||||
-
-
 |**7135**||PowerActualReceived8|Aktuelle Leistung des<br>Gerätes 8|Read|UNSIGNED8|570B.8|
-|---|---|---|---|---|---|---|
 |**7136**|FlowTemperatureReceived8 16-9|FlowTemperatureReceived8 8-1|Gerät 8<br>Vorlauftemperatur|Read|INTEGER16|570C.8|
 |**7137**|-|ProducerManagerStatusBitfieldReceived8|Gerät 8 Status<br>0 Pumpe aktiv|Read|UNSIGNED8|570d.8|
 ||||1 Leistungsmotor aktiv<br>(Brenner, Verdichter<br>oder Zusatzerzeuger)||||
@@ -1122,10 +999,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 ||||2 TWW wird erzeugt||||
 ||||3 HZG möglich||||
 ||||4 TWW möglich||||
-
-
 ||||5 Kühlung möglich||||
-|---|---|---|---|---|---|---|
 ||||6 Elektrisch möglich||||
 ||||7 Verriegelung<br>vorhanden||||
 |**7142**|-|ProducerManagerRequestReceived9|Gerät 9 Spezielle<br>Anforderung<br>0 Frostschutz|Read|UNSIGNED8|570E.9|
@@ -1167,10 +1041,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7511**|parBufferTimeProgramMonday1 Byte 6|parBufferTimeProgramMonday1 Byte 7|||||
 |**7512**|parBufferTimeProgramMonday1 Byte 8|parBufferTimeProgramMonday1 Byte 9|||||
 |**7513**|parBufferTimeProgramMonday1 Byte<br>10|parBufferTimeProgramMonday1 Byte<br>11|||||
-
-
 |**7514**|parBufferTimeProgramMonday1 Byte<br>12|parBufferTimeProgramMonday1 Byte<br>13|||||
-|---|---|---|---|---|---|---|
 |**7515**|parBufferTimeProgramMonday1 Byte<br>14|parBufferTimeProgramMonday1 Byte<br>15|||||
 |**7516**|parBufferTimeProgramMonday1 Byte<br>16|parBufferTimeProgramMonday1 Byte<br>17|||||
 |**7517**|parBufferTimeProgramMonday1 Byte<br>18||||||
@@ -1191,10 +1062,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7532**|parBufferTimeProgramWednesday1<br>Byte 8|parBufferTimeProgramWednesday1<br>Byte 9|||||
 |**7533**|parBufferTimeProgramWednesday1<br>Byte 10|parBufferTimeProgramWednesday1<br>Byte 11|||||
 |**7534**|parBufferTimeProgramWednesday1<br>Byte 12|parBufferTimeProgramWednesday1<br>Byte 13|||||
-
-
 |**7535**|parBufferTimeProgramWednesday1<br>Byte 14|parBufferTimeProgramWednesday1<br>Byte 15|||||
-|---|---|---|---|---|---|---|
 |**7536**|parBufferTimeProgramWednesday1<br>Byte 16|parBufferTimeProgramWednesday1<br>Byte 17|||||
 |**7537**|parBufferTimeProgramWednesday1<br>Byte 18||||||
 |**7538**|parBufferTimeProgramThursday1 Byte<br>0|parBufferTimeProgramThursday1 Byte<br>1||Read/|OCTET_STRI<br>NG|3509.0|
@@ -1217,10 +1085,7 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7554**|parBufferTimeProgramFriday1 Byte 12|parBufferTimeProgramFriday1 Byte 13|||||
 |**7555**|parBufferTimeProgramFriday1 Byte 14|parBufferTimeProgramFriday1 Byte 15|||||
 |**7556**|parBufferTimeProgramFriday1 Byte 16|parBufferTimeProgramFriday1 Byte 17|||||
-
-
 |**7557**|parBufferTimeProgramFriday1 Byte 18||||||
-|---|---|---|---|---|---|---|
 |**7558**|parBufferTimeProgramSaturday1 Byte 0|parBufferTimeProgramSaturday1 Byte 1||Read/<br>Write|OCTET_STRI<br>NG|350B.0|
 |**7559**|parBufferTimeProgramSaturday1 Byte 2|parBufferTimeProgramSaturday1 Byte 3|||||
 |**7560**|parBufferTimeProgramSaturday1 Byte 4|parBufferTimeProgramSaturday1 Byte 5|||||
@@ -1243,12 +1108,8 @@ Das GTW-08 unterstützt 12 Kreise, alle Kreise haben die gleiche Zuordnung. Für
 |**7577**|parBufferTimeProgramSunday1 Byte 18||||||
 |**7578 -**<br>**7599**|||||||
 |||Für Zukunft reserviert|||||
-||||||||
 |**7600**|varBufferTankTemperature1 16 -9|varBufferTankTemperature1 8 -1|Gemessene Pufferspeichertemperatur unten|Read|INTEGER16|5501.1|
-
-
 |**7601**|varBufferTankTemperature2 16 -9|varBufferTankTemperature2 8 -1|Gemessene Pufferspeichertemperatur oben|Read|INTEGER16|5501.2|
-|---|---|---|---|---|---|---|
 |**7602**||varBufferTankPumpState|Status Pufferspeicherpumpe (AUS/EIN)|Read|ENUM8|5508.0|
 |**7603**||varBufferMode|Betriebsart Pufferspeicher<br>0: Trennspeicher<br>1: Wasserspeicher|Read|ENUM8|5515.0|
 |**7604**||varBufferWinningHeatDemandRequest<br>Byte 1|Pufferspeicheranforderung Wärmegewinnung: die<br>von den nach dem Pufferspeicher<br>angeschlossenen Kreisen angeforderte<br>Wärmegewinnung- Leistung|Read|UNSIGNED8|5517.0|

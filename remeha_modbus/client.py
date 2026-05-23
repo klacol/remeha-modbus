@@ -18,23 +18,23 @@ from .registers import (
 )
 
 DEFAULT_PORT = 502
-DEFAULT_SLAVE_ID = 1
+DEFAULT_DEVICE_ID = 100  # GTW-08 default rotary switch position
 
 
 class RemehaModbusClient:
     """Client to communicate with a Remeha heating system via Modbus TCP (GTW-08)."""
 
-    def __init__(self, host: str, port: int = DEFAULT_PORT, slave_id: int = DEFAULT_SLAVE_ID):
+    def __init__(self, host: str, port: int = DEFAULT_PORT, slave_id: int = DEFAULT_DEVICE_ID):
         """Initialize the client.
 
         Args:
             host: IP address or hostname of the GTW-08 gateway.
             port: Modbus TCP port (default 502).
-            slave_id: Modbus slave address (set via GTW-08 rotary switch).
+            slave_id: Modbus device address (set via GTW-08 rotary switch).
         """
         self.host = host
         self.port = port
-        self.slave_id = slave_id
+        self.device_id = slave_id
         self._client = AsyncModbusTcpClient(host=host, port=port)
 
     async def connect(self) -> bool:
@@ -59,7 +59,7 @@ class RemehaModbusClient:
             result = await self._client.read_holding_registers(
                 address=register.address,
                 count=register.register_count,
-                slave=self.slave_id,
+                device_id=self.device_id,
             )
         except ModbusException as e:
             raise ConnectionError(f"Modbus read failed at address {register.address}: {e}") from e
@@ -103,7 +103,7 @@ class RemehaModbusClient:
                 result = await self._client.write_register(
                     address=register.address,
                     value=raw_value,
-                    slave=self.slave_id,
+                    device_id=self.device_id,
                 )
             else:
                 # Split into multiple 16-bit registers (big-endian)
@@ -111,7 +111,7 @@ class RemehaModbusClient:
                 result = await self._client.write_registers(
                     address=register.address,
                     values=registers,
-                    slave=self.slave_id,
+                    device_id=self.device_id,
                 )
         except ModbusException as e:
             raise ConnectionError(f"Modbus write failed at address {register.address}: {e}") from e

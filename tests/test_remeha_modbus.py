@@ -244,7 +244,7 @@ class TestClientWriteRegister:
         await client.write_register(reg, 55.0)
 
         client._client.write_register.assert_called_once_with(
-            address=257, value=5500, slave=1,
+            address=257, value=5500, device_id=1,
         )
 
     @pytest.mark.asyncio
@@ -271,5 +271,5 @@ class TestClientWriteRegister:
         await client.write_register(reg, 1)
 
         client._client.write_register.assert_called_once_with(
-            address=500, value=1, slave=1,
+            address=500, value=1, device_id=1,
         )
