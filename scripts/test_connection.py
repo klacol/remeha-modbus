@@ -149,11 +149,11 @@ async def test_modbus(host: str, port: int, device_id: int) -> bool:
             device_type = device_info.get("device_type_gtw08")
             model = identify_device(article_numbers, device_type)
             if model:
-                print(f"\n  >>> Gerät erkannt: {model}")
+                print(f"\n  >>> Device identified: {model}")
             else:
-                print(f"\n  >>> Gerät unbekannt. Bitte melden unter:")
+                print(f"\n  >>> Unknown device. Please report at:")
                 print(f"      https://github.com/klacol/remeha-modbus/issues")
-                print(f"      (Modellname vom Typenschild + obige Werte angeben)")
+                print(f"      (include model name from type plate + values above)")
         except Exception as e:
             print(f"  Fehler: {e}")
 

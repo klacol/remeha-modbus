@@ -100,6 +100,11 @@ MAIN_CONTROLLER_REGISTERS = [
         data_type=DataType.UINT8, access=AccessMode.READ,
     ),
     RegisterDefinition(
+        address=276, name="producer_request",
+        description="Erzeuger-Anforderung (Bit0=Frostschutz, Bit1=Frostschutz nur Pumpe, Bit2=Schornsteinfeger, Bit3=Wartungsanforderung)",
+        data_type=DataType.UINT8, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
         address=277, name="appliance_error",
         description="Aktueller Fehler Gerät (0xFFFF = kein Fehler)",
         data_type=DataType.UINT16, access=AccessMode.READ,
@@ -109,6 +114,16 @@ MAIN_CONTROLLER_REGISTERS = [
         description="Priorität Gerätefehler",
         data_type=DataType.ENUM8, access=AccessMode.READ,
         enum_values={0: "Verriegelung", 3: "Sperrung", 6: "Warnung", 255: "Kein Fehler"},
+    ),
+    RegisterDefinition(
+        address=279, name="appliance_status_1",
+        description="Gerätestatus 1 (Bit0=Flamme, Bit1=WP, Bit2=ElektrZusatzerz, Bit5=WartungErforderlich, Bit6=ResetErforderlich, Bit7=WasserdruckGering)",
+        data_type=DataType.UINT16, access=AccessMode.READ,
+    ),
+    RegisterDefinition(
+        address=280, name="appliance_status_2",
+        description="Gerätestatus 2 (Bit0=Pumpe, Bit1=3WegeVentilOffen, Bit4=TWWAktiv, Bit5=HzgAktiv, Bit6=KühlenAktiv)",
+        data_type=DataType.UINT16, access=AccessMode.READ,
     ),
     RegisterDefinition(
         address=288, name="burner_starts",
@@ -456,6 +471,11 @@ SYSTEM_DISCOVERY_REGISTERS = [
         description="Gerät ist Teil einer Kaskade",
         data_type=DataType.ENUM8, access=AccessMode.READ,
         enum_values={0: "Nein", 1: "Kaskadenmaster", 2: "Kaskadenslave"},
+    ),
+    RegisterDefinition(
+        address=200, name="reset_discovery_table",
+        description="Ermittlungstabelle zurücksetzen (0x5A schreiben zum Ausführen, wird automatisch auf 0 zurückgesetzt)",
+        data_type=DataType.UINT8, access=AccessMode.READ_WRITE,
     ),
 ]
 
