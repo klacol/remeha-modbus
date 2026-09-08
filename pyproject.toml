@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "remeha_modbus"
-version = "0.2.0"
+version = "0.2.1"
 description = "A Python library for accessing Remeha heating systems via Modbus TCP (GTW-08 gateway)"
 readme = "README.md"
 license = "MIT"

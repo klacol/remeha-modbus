@@ -6,6 +6,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from remeha_modbus.client import RemehaModbusClient
 from remeha_modbus.registers import (
+    ALL_REGISTERS,
     APPLIANCE_REGISTERS,
     MAIN_CONTROLLER_REGISTERS,
     MAINTENANCE_REGISTERS,
@@ -67,6 +68,11 @@ class TestRegisterDefinitions:
     def test_invalid_values_defined(self):
         assert INVALID_VALUES[DataType.UINT16] == 0xFFFF
         assert INVALID_VALUES[DataType.INT16] == -32768
+
+    def test_register_names_are_unique_across_all_registers(self):
+        names = [reg.name for reg in ALL_REGISTERS]
+        duplicates = sorted({name for name in names if names.count(name) > 1})
+        assert duplicates == [], f"Duplicate register names found: {duplicates}"
 
 
 class TestClientDecoding:
