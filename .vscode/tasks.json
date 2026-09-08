@@ -1,0 +1,63 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "PyPI: Paket bauen",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "-m",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "PyPI: Paket prüfen",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "-m",
+                "twine",
+                "check",
+                "dist/*"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "dependsOn": "PyPI: Paket bauen"
+        },
+        {
+            "label": "PyPI: Paket hochladen",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "-m",
+                "twine",
+                "upload",
+                "dist/*"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "TWINE_USERNAME": "__token__",
+                    "TWINE_PASSWORD": "${input:pypiToken}"
+                }
+            },
+            "problemMatcher": [],
+            "dependsOn": "PyPI: Paket prüfen",
+            "dependsOrder": "sequence"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "pypiToken",
+            "type": "promptString",
+            "description": "PyPI API-Token eingeben",
+            "password": true
+        }
+    ]
+}

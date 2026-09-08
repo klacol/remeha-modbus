@@ -11,7 +11,8 @@ __pycache__/
 *.py[cod]
 
 # IDE
-.vscode/
+.vscode/*
+!.vscode/tasks.json
 
 # pytest
 .pytest_cache/
